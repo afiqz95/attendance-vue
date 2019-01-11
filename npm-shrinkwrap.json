@@ -1139,6 +1139,11 @@
       "integrity": "sha1-wcS5vuPglyXdsQa3XB4wH+LxiyY=",
       "dev": true
     },
+    "filepond": {
+      "version": "3.7.4",
+      "resolved": "https://registry.npmjs.org/filepond/-/filepond-3.7.4.tgz",
+      "integrity": "sha512-rXOG8JcypIGQJPz28kCuWYNgh8NNsOOzEOUQC0bNQSZ70Z1xTOHkGqf04Sll7veRZM2yA3lXdneS+wNqsfxMUw=="
+    },
     "fill-range": {
       "version": "2.2.3",
       "resolved": "https://registry.npmjs.org/fill-range/-/fill-range-2.2.3.tgz",
@@ -3892,6 +3897,11 @@
       "resolved": "https://registry.npmjs.org/vue-class-component/-/vue-class-component-5.0.1.tgz",
       "integrity": "sha1-/toGw9ombO6QZOIkukkeCJkj3Og=",
       "dev": true
+    },
+    "vue-filepond": {
+      "version": "4.0.2",
+      "resolved": "https://registry.npmjs.org/vue-filepond/-/vue-filepond-4.0.2.tgz",
+      "integrity": "sha512-ZwZ1Q+XiwBMFYf33RlQYVrvFHW00jxsFpCeJJXXZpru1bL/zJOYAJa9dyu/p3v1zJ8OvPHbXKiDFmuhuNl/0+Q=="
     },
     "vue-hot-reload-api": {
       "version": "2.1.0",

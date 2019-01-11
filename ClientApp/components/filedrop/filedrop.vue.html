@@ -1,0 +1,16 @@
+<template>
+  <div class="card">
+      <div class="content">
+        <file-pond
+          name="test"
+          ref="pond"
+          label-idle="Drop files here..."
+          allow-multiple="true"
+          accepted-file-types="image/jpeg, image/png"
+          v-bind:files="myFiles"
+        />
+      </div>
+  </div>
+</template>
+
+<script src="./filedrop.ts"></script>
