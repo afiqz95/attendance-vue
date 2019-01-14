@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AttendanceSystem.Model;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace AttendanceSystem.Services
 
         public async Task<bool> InsertNewStaff(string userId, string name)
         {
-            var query = "INSERT INTO STAFF(ID,ATTENDDATE) VALUES(@ID,@NAME)";
+            var query = "INSERT INTO STAFF(ID,Name) VALUES(@ID,@NAME)";
 
             using (var command = new SqlCommand(query, conn))
             {
@@ -53,20 +54,27 @@ namespace AttendanceSystem.Services
         }
 
 
-        //GET SQL COMMAND ["Get Attendance","Get Users"]
-        public async Task<bool> GetAttendance()
+        public async Task<IEnumerable<AttendanceModel>> GetAttendance()
         {
-            var query = "SELECT STAFF.ID, STAFF.NAME, ATTENDRECORD.ATTENDDATE FROM STAFF" +
+            List<AttendanceModel> models = new List<AttendanceModel>();
+
+            var query = "SELECT STAFF.ID, STAFF.NAME, ATTENDRECORD.ATTENDDATE FROM STAFF " +
                 "INNER JOIN ATTENDRECORD ON STAFF.ID = ATTENDRECORD.ID";
 
             using (var command = new SqlCommand(query, conn))
             {
-                var result = await command.ExecuteNonQueryAsync();
-                if (result == 1)
-                    return true;
-                else
-                    return false;
+                var result = await command.ExecuteReaderAsync();
+                while (await result.ReadAsync())
+                {
+                    models.Add(new AttendanceModel
+                    {
+                        DateTime = result.GetDateTime(2),
+                        UserId = Convert.ToString(result.GetInt32(0)),
+                        StaffName = result.GetString(1)
+                    });
+                }
             }
+            return models;
         }
 
         #region IDisposable Support

@@ -22,6 +22,11 @@ const routes = [
   {
     path: "/fetchdata",
     component: require("./components/fetchdata/fetchdata.vue.html")
+  },
+  {
+    path: "/addUser",
+    component: require("./components/management/adduser.vue.html"),
+    meta: { title: "Add User" }
   }
 ];
 

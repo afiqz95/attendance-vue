@@ -9,5 +9,6 @@ namespace AttendanceSystem.Model
     {
         public string UserId { get; set; }
         public DateTime DateTime { get; set; }
+        public string StaffName { get; set; }
     }
 }

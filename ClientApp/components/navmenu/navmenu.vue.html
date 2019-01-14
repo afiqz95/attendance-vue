@@ -78,6 +78,12 @@
             <p>File Drop</p>
           </router-link>
         </li>
+        <li v-bind:class="{'active' : $route.meta.title == 'Add User'}">
+          <router-link to="/addUser">
+            <i class="pe-7s-upload"></i>
+            <p>Add User</p>
+          </router-link>
+        </li>
       </ul>
     </div>
     <div

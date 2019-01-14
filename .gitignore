@@ -41,7 +41,7 @@ Obj/
 # NUNIT
 *.VisualState.xml
 TestResult.xml
-
+npm-shrinkwrap.json
 # Build Results of an ATL Project
 [Dd]ebugPS/
 [Rr]eleasePS/

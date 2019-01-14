@@ -795,7 +795,7 @@
   position: relative;
   margin-bottom: 1em;
   /* base font size for whole component */
-  font-size: 1rem;
+  font-size: 1.5rem;
   /* base line height */
   line-height: normal;
   /* up uses default system font family */

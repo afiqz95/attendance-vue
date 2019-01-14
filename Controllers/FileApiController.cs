@@ -39,6 +39,24 @@ namespace AttendanceSystem.Controllers
 
             return Ok(new { Successful = true, Count = lines.Count() });
         }
+
+        [Route("getAttendance")]
+        public async Task<IActionResult> GetAttendances()
+        {
+            using (var sql = new SqlConnectionFactory())
+            {
+                return Ok(await sql.GetAttendance());
+            }
+        }
+
+        [Route("newUser")]
+        public async Task<IActionResult> NewUser([FromBody]NewUserModel model)
+        {
+            using (var sql = new SqlConnectionFactory())
+            {
+                return Ok(await sql.InsertNewStaff(model.Id, model.Name));
+            }
+        }
     }
 
 

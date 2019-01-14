@@ -1,5 +1,42 @@
-<template>
-  <div></div>
+<template
+  ><div class="card">
+    <div class="content">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Id</label>
+              <input
+                type="number"
+                class="form-control"
+                placeholder="Staff Id"
+                v-model="id"
+              />
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Name</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Staff Name"
+                v-model="name"
+              />
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button
+              class="btn btn-success btn-fill btn-block"
+              @click="insertNewUser"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script src="./adduser.ts"></script>
