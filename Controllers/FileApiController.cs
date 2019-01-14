@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using AttendanceSystem.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AttendanceSystem.Services;
 
 namespace AttendanceSystem.Controllers
 {
@@ -15,6 +16,7 @@ namespace AttendanceSystem.Controllers
     [Route("api/FileApi")]
     public class FileApiController : Controller
     {
+        [Route("uploadfile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             var lines = await file.ReadAsStringAsync();
@@ -29,13 +31,9 @@ namespace AttendanceSystem.Controllers
                     DateTime = DateTime.Parse(splitted[1])
                 };
 
-                using (SqlConnection connection = new SqlConnection())
+                using (var sql = new SqlConnectionFactory())
                 {
-                    var sql = $"INSERT INTO heretablename VALUE('wahtever','wtbeerer')";
-                    using (SqlCommand cmd = new SqlCommand(sql))
-                    {
-                        await cmd.ExecuteNonQueryAsync();
-                    }
+                    await sql.InsertNewAttendanceRecord(temp.UserId, temp.DateTime);
                 }
             });
 
