@@ -20,7 +20,7 @@ namespace AttendanceSystem
 
         public static string GetSqlConnString()
         {
-            return GetConfig().GetConnectionString("DefaultConnection");
+            return GetConfig().GetConnectionString("AttendanceSystemIdentityDbContextConnection");
         }
     }
 }
