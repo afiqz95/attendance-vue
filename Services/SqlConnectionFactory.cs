@@ -35,9 +35,29 @@ namespace AttendanceSystem.Services
             }
         }
 
-        public async Task<bool> InsertNewUser(string userId, string name)
+        public async Task<bool> InsertNewStaff(string userId, string name)
         {
-            var query = "~~~~~";
+            var query = "INSERT INTO STAFF(ID,ATTENDDATE) VALUES(@ID,@NAME)";
+
+            using (var command = new SqlCommand(query, conn))
+            {
+                command.Parameters.AddWithValue("@ID", userId);
+                command.Parameters.AddWithValue("@NAME", name);
+
+                var result = await command.ExecuteNonQueryAsync();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+
+        //GET SQL COMMAND ["Get Attendance","Get Users"]
+        public async Task<bool> GetAttendance()
+        {
+            var query = "SELECT STAFF.ID, STAFF.NAME, ATTENDRECORD.ATTENDDATE FROM STAFF" +
+                "INNER JOIN ATTENDRECORD ON STAFF.ID = ATTENDRECORD.ID";
 
             using (var command = new SqlCommand(query, conn))
             {
@@ -48,8 +68,6 @@ namespace AttendanceSystem.Services
                     return false;
             }
         }
-
-        //GET SQL COMMAND ["Get Attendance","Get Users"]
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
