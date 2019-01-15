@@ -7,17 +7,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: require("./components/home/home.vue.html"),
-    meta: { title: "Dashboard" }
+    component: require("./components/filedrop/filedrop.vue.html"),
+    meta: { title: "File Upload" }
   },
   {
     path: "/counter",
     component: require("./components/counter/counter.vue.html")
-  },
-  {
-    path: "/filedrop",
-    component: require("./components/filedrop/filedrop.vue.html"),
-    meta: { title: "File Upload" }
   },
   {
     path: "/fetchdata",

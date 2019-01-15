@@ -1,16 +1,21 @@
 <template>
-  <div class="card">
+  <div>
+    <div class="card">
       <div class="content">
-        <file-pond
-          name="test"
-          ref="pond"
-          label-idle="Drop files here..."
-          allow-multiple="true"
-          accepted-file-types="image/jpeg, image/png"
-          v-bind:files="myFiles"
-        />
+        <file-pond name="test" ref="pond" label-idle="Drop files here..." allow-multiple="true" accepted-file-types="image/jpeg, image/png"
+          v-bind:files="myFiles" />
         <button class="btn btn-primary btn-block btn-sm" @click="upload">Upload</button>
       </div>
+    </div>
+    <div class="v-card__text">
+      <div class="content">
+        <vue-good-table
+        :columns="columns"
+        :rows="rows"
+        styleClass="vgt-table striped"
+        ></vue-good-table>
+    </div>
+    </div>
   </div>
 </template>
 

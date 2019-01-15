@@ -48,6 +48,32 @@ namespace AttendanceSystem.Controllers
                 return Ok(await sql.GetAttendance());
             }
         }
+        [Route("getMockUpAttendance")]
+        public IActionResult GetMockupAttendances()
+        {
+            var lists = new List<AttendanceModel>();
+            lists.Add(new AttendanceModel{
+                  UserId = "123",
+                  DateTime = DateTime.Now,
+                  StaffName = "Whatever"
+            });
+            lists.Add(new AttendanceModel{
+                  UserId = "123",
+                  DateTime = DateTime.Now,
+                  StaffName = "Whatever"
+            });
+            lists.Add(new AttendanceModel{
+                  UserId = "123",
+                  DateTime = DateTime.Now,
+                  StaffName = "Whatever"
+            });
+            lists.Add(new AttendanceModel{
+                  UserId = "123",
+                  DateTime = DateTime.Now,
+                  StaffName = "Whatever"
+            });
+            return Ok(lists);
+        }
 
         [Route("newUser")]
         public async Task<IActionResult> NewUser([FromBody]NewUserModel model)
