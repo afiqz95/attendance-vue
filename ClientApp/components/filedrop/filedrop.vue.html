@@ -13,6 +13,9 @@
         :columns="columns"
         :rows="rows"
         styleClass="vgt-table striped"
+        :sort-options="{
+          enabled: true,
+          initialSortBy: {field: 'userId', type: 'asc'}}"
         ></vue-good-table>
     </div>
     </div>

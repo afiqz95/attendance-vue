@@ -21,23 +21,41 @@ namespace AttendanceSystem.Controllers
         {
             var lines = await file.ReadAsStringAsync();
 
+            List<AttendanceModel> Users = new List<AttendanceModel>();
+            List<AttendanceModel> Attendances = new List<AttendanceModel>();
             lines.ToList().ForEach(async line =>
             {
                 var splitted = line.Split('\t');
 
-                var temp = new AttendanceModel()
+                var tempDate = new AttendanceModel()
                 {
                     UserId = splitted[0].Trim(),
                     DateTime = DateTime.Parse(splitted[1])
                 };
 
+                Attendances.Add(tempDate);
                 using (var sql = new SqlConnectionFactory())
                 {
-                    await sql.InsertNewAttendanceRecord(temp.UserId, temp.DateTime);
+                    await sql.InsertNewAttendanceRecord(tempDate.UserId, tempDate.DateTime);
                 }
             });
 
-            return Ok(new { Successful = true, Count = lines.Count() });
+            using (var sql = new SqlConnectionFactory())
+            {
+                Users = (await sql.GetAllUsers()).ToList();
+            }
+
+            var data = Attendances.Select(x =>
+            {
+                return new AttendanceModel
+                {
+                    DateTime = x.DateTime,
+                    StaffName = Users.Any(z => z.UserId == x.UserId) == false ? "No Data" : Users.Where(y => y.UserId == x.UserId).Select(z => z.StaffName).First(),
+                    UserId = x.UserId
+                };
+            });
+
+            return Ok(new { Successful = true, Count = lines.Count(), data = data.OrderByDescending(x=>x.UserId).ToArray() });
         }
 
         [Route("getAttendance")]
@@ -52,25 +70,29 @@ namespace AttendanceSystem.Controllers
         public IActionResult GetMockupAttendances()
         {
             var lists = new List<AttendanceModel>();
-            lists.Add(new AttendanceModel{
-                  UserId = "123",
-                  DateTime = DateTime.Now,
-                  StaffName = "Whatever"
+            lists.Add(new AttendanceModel
+            {
+                UserId = "123",
+                DateTime = DateTime.Now,
+                StaffName = "Whatever"
             });
-            lists.Add(new AttendanceModel{
-                  UserId = "123",
-                  DateTime = DateTime.Now,
-                  StaffName = "Whatever"
+            lists.Add(new AttendanceModel
+            {
+                UserId = "123",
+                DateTime = DateTime.Now,
+                StaffName = "Whatever"
             });
-            lists.Add(new AttendanceModel{
-                  UserId = "123",
-                  DateTime = DateTime.Now,
-                  StaffName = "Whatever"
+            lists.Add(new AttendanceModel
+            {
+                UserId = "123",
+                DateTime = DateTime.Now,
+                StaffName = "Whatever"
             });
-            lists.Add(new AttendanceModel{
-                  UserId = "123",
-                  DateTime = DateTime.Now,
-                  StaffName = "Whatever"
+            lists.Add(new AttendanceModel
+            {
+                UserId = "123",
+                DateTime = DateTime.Now,
+                StaffName = "Whatever"
             });
             return Ok(lists);
         }

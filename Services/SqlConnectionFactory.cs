@@ -77,6 +77,27 @@ namespace AttendanceSystem.Services
             return models;
         }
 
+        public async Task<IEnumerable<AttendanceModel>> GetAllUsers()
+        {
+            List<AttendanceModel> models = new List<AttendanceModel>();
+            var name = "SELECT * FROM STAFF";
+
+            using (var command = new SqlCommand(name,conn))
+            {
+                var result = await command.ExecuteReaderAsync();
+                while(await result.ReadAsync())
+                {
+                    models.Add(new AttendanceModel
+                    {
+                        UserId = Convert.ToString(result.GetInt32(0)),
+                        StaffName = result.GetString(1)
+                    });
+                }
+            }
+
+            return models;
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

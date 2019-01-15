@@ -17,6 +17,7 @@ export default Vue.extend({
         {
           label: 'ID',
           field: 'userId',
+          type:'number'
         },
         {
           label: 'Name',
@@ -44,13 +45,10 @@ export default Vue.extend({
         .post("/api/fileApi/uploadFile", fd, {
           headers: { "Content-Type": "multipart/form-data" }
         })
-        .then(res => console.log(res));
+        .then(res => {
+          self.rows = res.data.data;
+        });
+      
     }
   },
-  created(){
-    var self: any = this;
-    axios
-      .get("/api/fileApi/getMockupAttendance")
-      .then(res => (self.rows = res.data));
-  }
 });
