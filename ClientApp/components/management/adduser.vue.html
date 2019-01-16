@@ -36,7 +36,15 @@
             </span>
             <span v-else> {{ colScope.column.label }} </span>
           </template>
-
+          
+          <template slot="table-row" scope="docScope">
+            <span class="pull-left" v-if="docScope.column.field == 'userId'">
+              {{docScope.row.userId}}
+            </span>
+            <span class="pull-left" v-if="docScope.column.field == 'staffName'">
+              {{docScope.row.staffName}}
+            </span>
+            </template>
         </vue-good-table>
       </div>
     </div>
