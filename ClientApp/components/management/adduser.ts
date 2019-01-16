@@ -1,12 +1,26 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Axios from "axios";
+import {VueGoodTable} from "vue-good-table";
 
 export default Vue.extend({
+  components:{VueGoodTable},
   data() {
     return {
       id: 0,
-      name: ""
+      name: "",
+      columns: [
+        {
+          label: 'ID',
+          field: 'userId',
+          type:'number'
+        },
+        {
+          label: 'Name',
+          field: 'staffName',
+        },
+      ],
+      rows: [],
     };
   },
   methods: {
