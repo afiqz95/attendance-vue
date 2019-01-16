@@ -1,10 +1,10 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Axios from "axios";
-import {VueGoodTable} from "vue-good-table";
+import { VueGoodTable } from "vue-good-table";
 
 export default Vue.extend({
-  components:{VueGoodTable},
+  components: { VueGoodTable },
   data() {
     return {
       id: 0,
@@ -13,7 +13,7 @@ export default Vue.extend({
         {
           label: 'ID',
           field: 'userId',
-          type:'number'
+          type: 'number'
         },
         {
           label: 'Name',
@@ -27,11 +27,20 @@ export default Vue.extend({
     insertNewUser() {
       var self: any = this;
       Axios
-      .post("/api/fileApi/newUser", { Id: self.id, Name: self.name });
+        .post("/api/fileApi/newUser", { Id: self.id, Name: self.name });
       Axios
-      .get("/api/fileApi/getStaff")
-      .then (res=> {self.rows = res.data})
+        .get("/api/fileApi/getStaff")
+        .then(res => { self.rows = res.data })
+    },
+    selectionChanged(item) {
+      console.log(item);
     }
+  },
+  created() {
+    var self: any = this;
+    Axios
+      .get("/api/fileApi/getStaff")
+      .then(res => { self.rows = res.data })
   }
 
 });

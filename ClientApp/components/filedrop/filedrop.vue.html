@@ -19,7 +19,28 @@
         :search-options="{
             enabled: true
           }"
-        ></vue-good-table>
+        >
+        <template slot="table-column" scope="colScope">
+          <span class="pull-left" v-if="colScope.column.field =='userId'">
+            {{ colScope.column.label }}
+          </span>
+          <span v-else> {{ colScope.column.label }} </span>
+        </template>
+        
+        
+        <template slot="table-row" scope="docScope">
+          <span class="pull-left" v-if="docScope.column.field == 'userId'">
+            {{docScope.row.userId}}
+          </span>
+          <span class="pull-left" v-if="docScope.column.field == 'staffName'">
+            {{docScope.row.staffName}}
+          </span>
+          <span class="pull-right" v-if="docScope.column.field == 'dateTime'">
+            {{docScope.row.dateTime}}
+          </span>
+        </template>
+        
+      </vue-good-table>
     </div>
     </div>
   </div>

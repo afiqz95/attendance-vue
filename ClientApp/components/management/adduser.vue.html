@@ -25,26 +25,24 @@
     </div>
     <div class="content">
       <div class="card-body">
-        <vue-good-table :columns="columns" :rows="rows" styleClass="vgt-table striped" :sort-options="{
-          enabled: true,
-          initialSortBy: {field: 'userId', type: 'asc'}}" :search-options="{
-            enabled: true
-          }">
+        <vue-good-table @on-selected-rows-change="selectionChanged" :columns="columns" :rows="rows" styleClass="vgt-table striped"
+          :select-options="{ enabled: true }">
           <template slot="table-column" scope="colScope">
             <span class="pull-left" v-if="colScope.column.field =='userId'">
               {{ colScope.column.label }}
             </span>
             <span v-else> {{ colScope.column.label }} </span>
           </template>
-          
+
           <template slot="table-row" scope="docScope">
             <span class="pull-left" v-if="docScope.column.field == 'userId'">
-              {{docScope.row.userId}}
+              {{docScope.formattedRow["userId"]}}
             </span>
-            <span class="pull-left" v-if="docScope.column.field == 'staffName'">
-              {{docScope.row.staffName}}
+            <span class="pull-left" v-else>
+              {{docScope.formattedRow["staffName"]}}
             </span>
-            </template>
+          </template>
+
         </vue-good-table>
       </div>
     </div>

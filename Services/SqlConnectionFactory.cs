@@ -98,6 +98,20 @@ namespace AttendanceSystem.Services
             return models;
         }
 
+        public async Task<bool> DeleteUser(string userId){
+            var query = "DELETE FROM STAFF WHERE STAFF.ID = @ID";
+
+            using (var command = new SqlCommand(query,conn)){
+                 command.Parameters.AddWithValue("@ID", userId);
+
+                 var result = await command.ExecuteNonQueryAsync();
+                if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
