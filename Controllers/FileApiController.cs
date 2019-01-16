@@ -105,6 +105,15 @@ namespace AttendanceSystem.Controllers
                 return Ok(await sql.InsertNewStaff(model.Id, model.Name));
             }
         }
+
+        [Route("getStaff")]
+        public async Task<IActionResult> getStaff()
+        {
+            using (var sql = new SqlConnectionFactory())
+            {
+                return Ok(await sql.GetAllUsers());
+            }
+        }
     }
 
 
