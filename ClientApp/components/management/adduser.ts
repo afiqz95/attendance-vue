@@ -27,7 +27,13 @@ export default Vue.extend({
     insertNewUser() {
       var self: any = this;
       Axios.post("/api/fileApi/newUser", { Id: self.id, Name: self.name });
-      Axios.get("/api/fileApi/getStaff").then (res=> {self.rows = res.data})
     }
+  },
+  created(){
+    var self: any = this;
+    Axios
+    .get("/api/fileApi/getStaff")
+    .then (res=> {self.rows = res.data})
   }
+
 });
