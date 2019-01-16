@@ -33,7 +33,8 @@ export default Vue.extend({
         .then(res => { self.rows = res.data })
     },
     selectionChanged(item) {
-      console.log(item);
+      var self : any = this;
+      console.log(self.$refs['test'].selectedRow);
     }
   },
   created() {

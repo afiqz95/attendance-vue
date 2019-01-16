@@ -55,7 +55,7 @@ namespace AttendanceSystem.Controllers
                 };
             });
 
-            return Ok(new { Successful = true, Count = lines.Count(), data = data.OrderByDescending(x=>x.UserId).ToArray() });
+            return Ok(new { Successful = true, Count = lines.Count(), data = data.OrderByDescending(x => x.UserId).ToArray() });
         }
 
         [Route("getAttendance")]
@@ -116,12 +116,16 @@ namespace AttendanceSystem.Controllers
         }
 
         [Route("deleteStaff")]
-        public async Task<IActionResult> deleteStaff()([FromBody]NewUserModel model)
+        public async Task<IActionResult> deleteStaff([FromBody]IEnumerable<NewUserModel> model)
         {
-            using (var sql = new SqlConnectionFactory())
+            foreach (var user in model)
             {
-                return Ok(await sql.deleteUser(model.Id))
+                using (var sql = new SqlConnectionFactory())
+                {
+                    await sql.DeleteUser(user.Id);
+                }
             }
+            return Ok();
         }
     }
 

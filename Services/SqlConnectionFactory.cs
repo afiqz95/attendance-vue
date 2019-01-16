@@ -99,7 +99,7 @@ namespace AttendanceSystem.Services
         }
 
         public async Task<bool> DeleteUser(string userId){
-            var query = "DELETE FROM STAFF WHERE STAFF.ID = @ID";
+            var query = "DELETE FROM STAFF WHERE ID = @ID";
 
             using (var command = new SqlCommand(query,conn)){
                  command.Parameters.AddWithValue("@ID", userId);
