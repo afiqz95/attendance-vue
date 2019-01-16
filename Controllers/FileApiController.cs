@@ -114,6 +114,15 @@ namespace AttendanceSystem.Controllers
                 return Ok(await sql.GetAllUsers());
             }
         }
+
+        [Route("deleteStaff")]
+        public async Task<IActionResult> deleteStaff()([FromBody]NewUserModel model)
+        {
+            using (var sql = new SqlConnectionFactory())
+            {
+                return Ok(await sql.deleteUser(model.Id))
+            }
+        }
     }
 
 
