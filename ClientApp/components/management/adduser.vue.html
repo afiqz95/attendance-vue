@@ -27,9 +27,11 @@
       <div class="card-body">
         <vue-good-table @on-selected-rows-change="selectionChanged" :columns="columns" :rows="rows" styleClass="vgt-table striped"
           :select-options="{ enabled: true }" ref="test">
+          
           <div slot="selected-row-actions">
-              <button>Delete</button>
+              <button class="btn btn-fill btn-danger" @click="deleteSelected">Delete</button>
             </div>
+
           <template slot="table-column" scope="colScope">
             <span class="pull-left" v-if="colScope.column.field =='userId'">
               {{ colScope.column.label }}

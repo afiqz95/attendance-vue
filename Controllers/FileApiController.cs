@@ -12,7 +12,6 @@ using AttendanceSystem.Services;
 
 namespace AttendanceSystem.Controllers
 {
-    [Produces("application/json")]
     [Route("api/FileApi")]
     public class FileApiController : Controller
     {
@@ -116,7 +115,8 @@ namespace AttendanceSystem.Controllers
         }
 
         [Route("deleteStaff")]
-        public async Task<IActionResult> deleteStaff([FromBody]IEnumerable<NewUserModel> model)
+        [HttpPost]
+        public async Task<IActionResult> deleteStaff([FromBody] IEnumerable<NewUserModel> model)
         {
             foreach (var user in model)
             {
