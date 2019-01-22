@@ -1,5 +1,61 @@
 <template>
-  
+  <div>
+    <div class="card">
+      <div class="header"><div class="title">Leave Form</div></div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <label>Staff Name</label>
+            <select class="form-control" v-model="Selected" placeholder="Select Staff">
+              <option v-for="staff in Staffs" :value="staff.userId">{{ staff.staffName }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card" v-if="Selected">
+      <div class="header"><div class="title">Form</div></div>
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <input type="radio" id="one" value="Add Days" v-model="formType" />
+            <label style="font-size: 1.5rem;color: grey;margin-right: 1rem" for="one"
+              >Add Days</label
+            >
+            <input type="radio" id="two" value="Apply Leave" v-model="formType" />
+            <label style="font-size: 1.5rem;color: grey" for="two">Apply Leave</label>
+          </div>
+          <div v-if="formType =='Add Days'">
+            <div class="col-md-12">
+              <label>Number Of Days</label>
+              <input type="number" class="form-control" v-model="Days" />
+            </div>
+            <div class="col-md-12" style="margin-top: 1rem">
+              <button class="btn btn-sm btn-primary" @click="changeDay(0.5)">Half Day</button>
+              <button class="btn btn-sm btn-primary" @click="changeDay(1)">1 Day</button>
+              <button class="btn btn-sm btn-primary" @click="changeDay(1.5)">1.5 Day</button>
+              <button class="btn btn-sm btn-primary" @click="changeDay(2)">2 Days</button>
+              <button class="btn btn-sm btn-primary" @click="changeDay(2.5)">2.5 Days</button>
+              <button class="btn btn-sm btn-primary" @click="changeDay(3)">3 Days</button>
+            </div>
+            <div class="col-md-12" style="margin-top: 2rem">
+              <button class="btn btn-block btn-success" @click="AddDays">Save</button>
+            </div>
+          </div>
+          <div v-if="formType =='Apply Leave'">
+            <div class="col-md-6" style="margin-top: 2rem">
+              <label>From Date</label>
+              <flat-pickr v-model="from" class="form-control"></flat-pickr>
+            </div>
+            <div class="col-md-6" style="margin-top: 2rem">
+              <label>To Date</label>
+              <flat-pickr v-model="to" class="form-control"></flat-pickr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script src="./leaveform.ts"></script>

@@ -2,61 +2,40 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import Axios from "axios";
 import { VueGoodTable } from "vue-good-table";
+import flatPickr from "vue-flatpickr-component";
+import "flatpickr/dist/flatpickr.css";
 
 export default Vue.extend({
-  components: { VueGoodTable },
+  components: {
+    flatPickr
+  },
   data() {
     return {
-      id: 0,
-      name: "",
-      columns: [
-        {
-          label: 'ID',
-          field: 'userId',
-          type: 'number'
-        },
-        {
-          label: 'Name',
-          field: 'staffName',
-        },
-      ],
-      rows: [],
+      Staffs: [],
+      Selected: null,
+      from: null,
+      to: null,
+      formType: null,
+      Days: 0
     };
   },
   methods: {
-    insertNewUser() {
+    changeDay(number) {
       var self: any = this;
-      Axios
-        .post("/api/fileApi/newUser", { Id: self.id, Name: self.name });
-      Axios
-        .get("/api/fileApi/getStaff")
-        .then(res => { self.rows = res.data })
+      self.Days = number;
     },
-    selectionChanged(item) {
+    AddDays() {
       var self: any = this;
-      console.log(self.$refs['test'].selectedRows);
-    },
-    deleteSelected() {
-      var self: any = this;
-      var mapped = self.$refs['test'].selectedRows.map(x => {
-        return {
-          Id: x.userId
-        }
-      });
-      console.log(mapped);
-
-      Axios.post('/api/fileApi/deleteStaff', mapped).then(res => {
-        Axios
-          .get("/api/fileApi/getStaff")
-          .then(res => { self.rows = res.data });
-      })
+      Axios.post("/api/leave", { StaffId: self.Selected, Days: self.Days }).then(res =>
+        console.log(res)
+      );
     }
   },
   created() {
     var self: any = this;
-    Axios
-      .get("/api/fileApi/getStaff")
-      .then(res => { self.rows = res.data })
+    Axios.get("/api/FileApi/GetStaff").then(res => {
+      console.log(res);
+      self.Staffs = res.data;
+    });
   }
-
 });

@@ -82,10 +82,10 @@ namespace AttendanceSystem.Services
             List<AttendanceModel> models = new List<AttendanceModel>();
             var name = "SELECT * FROM STAFF";
 
-            using (var command = new SqlCommand(name,conn))
+            using (var command = new SqlCommand(name, conn))
             {
                 var result = await command.ExecuteReaderAsync();
-                while(await result.ReadAsync())
+                while (await result.ReadAsync())
                 {
                     models.Add(new AttendanceModel
                     {
@@ -98,14 +98,67 @@ namespace AttendanceSystem.Services
             return models;
         }
 
-        public async Task<bool> DeleteUser(string userId){
+        public async Task<bool> DeleteUser(string userId)
+        {
             var query = "DELETE FROM STAFF WHERE ID = @ID";
 
-            using (var command = new SqlCommand(query,conn)){
-                 command.Parameters.AddWithValue("@ID", userId);
+            using (var command = new SqlCommand(query, conn))
+            {
+                command.Parameters.AddWithValue("@ID", userId);
 
-                 var result = await command.ExecuteNonQueryAsync();
+                var result = await command.ExecuteNonQueryAsync();
                 if (result == 1)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public async Task<bool> InsertNewLeave(LeaveModel model)
+        {
+            string sb;
+
+            if (model.From.HasValue && model.From.HasValue)
+            {
+                sb = "INSERT INTO [dbo].[LeaveRecord]" +
+"           ([StaffId]" +
+"           ,[From]" +
+"           ,[To]" +
+"           ,[HalfPeriod]" +
+"           ,[Days]" +
+"           ,[TypeOfLeave])" +
+"     VALUES" +
+"           (@StaffId" +
+"           ,@From" +
+"           ,@To" +
+"           ,@HalfPeriod" +
+"           ,@Days" +
+"           ,@TypeOfLeave)";
+            }
+            else
+            {
+                sb = "INSERT INTO [dbo].[LeaveRecord]" +
+"           ([StaffId]" +
+"           ,[Days])" +
+"     VALUES" +
+"           (@StaffId" +
+"           ,@Days)";
+            }
+
+            using (var cmd = new SqlCommand(sb, conn))
+            {
+                cmd.Parameters.AddWithValue("@StaffId", model.StaffId);
+                cmd.Parameters.AddWithValue("@Days", model.Days);
+                if (model.From.HasValue && model.To.HasValue)
+                {
+                    cmd.Parameters.AddWithValue("@From", model.From);
+                    cmd.Parameters.AddWithValue("@To", model.To);
+                    cmd.Parameters.AddWithValue("@HalfPeriod", model.HalfPeriod);
+                    cmd.Parameters.AddWithValue("@TypeOfLeave", model.TypeOfLeave);
+                }
+
+                var res = await cmd.ExecuteNonQueryAsync();
+                if (res > 0)
                     return true;
                 else
                     return false;

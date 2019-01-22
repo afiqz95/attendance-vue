@@ -27,7 +27,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "filepond": "^3.7.4",
-    "vue-filepond": "^4.0.2",
+    "vue-filepond": "^4.0.3",
+    "vue-flatpickr-component": "^8.1.1",
     "vue-good-table": "^2.16.0"
   }
 }
