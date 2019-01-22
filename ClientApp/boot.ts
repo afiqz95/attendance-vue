@@ -22,6 +22,11 @@ const routes = [
     path: "/addUser",
     component: require("./components/management/adduser.vue.html"),
     meta: { title: "Add User" }
+  },
+  {
+    path: "/leaveForm",
+    component: require("./components/leaveform/leaveform.vue.html"),
+    meta: { title: "Leave Form" }
   }
 ];
 

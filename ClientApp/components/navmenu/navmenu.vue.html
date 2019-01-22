@@ -74,8 +74,14 @@
         </li>
         <li v-bind:class="{'active' : $route.meta.title == 'Add User'}">
           <router-link to="/addUser">
-            <i class="pe-7s-id"></i>
+            <i class="pe-7s-add-user"></i>
             <p>Add User</p>
+          </router-link>
+        </li>
+        <li v-bind:class="{'active' : $route.meta.title == 'Leave Form'}">
+          <router-link to="/leaveform">
+            <i class="pe-7s-id"></i>
+            <p>Leave Form</p>
           </router-link>
         </li>
       </ul>

@@ -7,9 +7,8 @@ import {VueGoodTable}  from 'vue-good-table';
 import "vue-good-table/dist/vue-good-table.css";
 
 const VueFilePond = vueFilePond();
-
 export default Vue.extend({
-  components: { VueGoodTable },
+  components: { VueGoodTable},
   data() {
     return {
       myFiles: [],
